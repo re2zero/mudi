@@ -158,5 +158,7 @@ jobs:
           TAG: ${{ github.ref_name }}
         run: |
           gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --generate-notes
-          find artifacts -type f \( -name 'mudi-*' -o -name 'mudi_*' -o -name '*.tar.gz' \) \
+          # mudi_* matches only debs — a bare mudi_* also sweeps the .qm
+          # translations inside every stage/ artifact tree
+          find artifacts -type f \( -name 'mudi-*' -o -name 'mudi_*.deb' -o -name '*.tar.gz' \) \
             ! -name '*.tar.gz.*' -print0 | xargs -0 gh release upload "$TAG" --clobber
