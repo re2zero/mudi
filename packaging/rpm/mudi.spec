@@ -19,3 +19,4 @@ from the linked binaries by rpmbuild.
 /usr/share/applications/mudi.desktop
 /usr/share/icons/hicolor/scalable/apps/mudi.svg
 /usr/share/mudi/translations/
+/usr/share/terminalwidget6/
