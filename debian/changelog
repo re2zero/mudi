@@ -1,3 +1,12 @@
+mudi (0.4.1) unstable; urgency=medium
+
+  * CI releases now ship Linux installation packages: deb (works on
+    deepin/UOS, Debian 12 and Ubuntu 24.04+ via dual Qt6 core
+    dependency naming) and rpm for RPM-based distributions, next to
+    the existing portable binaries and tarballs.
+
+ -- re2zero <re2zero@users.noreply.github.com>  Thu, 25 Sep 2026 15:30:00 +0800
+
 mudi (0.4.0) unstable; urgency=medium
 
   * Redesign the settings dialog in DTK style: group cards, pill
