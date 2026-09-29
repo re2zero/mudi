@@ -66,6 +66,7 @@ jobs:
           -DDISABLE_DTK=${{ matrix.dtk }}
           ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH}
           ${UCHARDET_FLAGS:+-DCMAKE_CXX_FLAGS=$UCHARDET_FLAGS}
+          ${{ runner.os == 'Linux' && '-DCMAKE_EXE_LINKER_FLAGS="-static-libstdc++ -static-libgcc"' || '' }}
 
       - name: Build
         run: cmake --build build --parallel
@@ -73,7 +74,6 @@ jobs:
       - name: Stage portable layout
         run: |
           cmake --install build --prefix stage
-          mkdir -p stage/share/terminalwidget6 2>/dev/null || true
           tar -C stage -czf "$ASSET.tar.gz" .
           cp build/mudi "$ASSET"
           ls -la "$ASSET" "$ASSET.tar.gz"
