@@ -21,12 +21,15 @@ set(TERMINALWIDGET_VERSION_MINOR "14")
 set(TERMINALWIDGET_VERSION_PATCH "1")
 
 set(TERMINALWIDGET_LIBRARY_NAME terminalwidget${QT_VERSION_MAJOR})
+# data lives under mudi's own name: on deepin the system share/terminalwidget6
+# tree belongs to the deepin-terminal package, and shipping the same paths
+# makes dpkg refuse the mudi package (file conflict, 0.4.1 vs deepin-terminal)
 # absolute, for compile-time data-dir defines
-set(TW_INSTALL_DATADIR "${CMAKE_INSTALL_FULL_DATADIR}/${TERMINALWIDGET_LIBRARY_NAME}")
+set(TW_INSTALL_DATADIR "${CMAKE_INSTALL_FULL_DATADIR}/mudi/${TERMINALWIDGET_LIBRARY_NAME}")
 # relative, for install DESTINATION (must honor cmake --install --prefix)
-set(TW_INSTALL_DATADIR_REL "${CMAKE_INSTALL_DATADIR}/${TERMINALWIDGET_LIBRARY_NAME}")
+set(TW_INSTALL_DATADIR_REL "${CMAKE_INSTALL_DATADIR}/mudi/${TERMINALWIDGET_LIBRARY_NAME}")
 # relative to the application directory, for relocatable/bundled layouts
-set(TW_RELOCATABLE_DATADIR "../share/${TERMINALWIDGET_LIBRARY_NAME}")
+set(TW_RELOCATABLE_DATADIR "../share/mudi/${TERMINALWIDGET_LIBRARY_NAME}")
 
 option(TERMINALWIDGET_STATIC_BUILD "Build the vendored terminalwidget as a static library" ON)
 

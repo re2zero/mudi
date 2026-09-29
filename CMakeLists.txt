@@ -3,7 +3,7 @@ project(mudi LANGUAGES CXX)
 
 # Default version, overridden by debian/rules via -DAPP_VERSION
 if(NOT DEFINED APP_VERSION)
-    set(APP_VERSION "0.4.1")
+    set(APP_VERSION "0.4.2")
 endif()
 message(STATUS "   >>> Version: ${APP_VERSION}")
 

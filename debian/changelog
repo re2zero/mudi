@@ -1,3 +1,14 @@
+mudi (0.4.2) unstable; urgency=medium
+
+  * Fix the CI-built deb refusing to install on deepin: the vendored
+    terminalwidget data (color schemes, keyboard layouts) now lives in
+    /usr/share/mudi/terminalwidget6 instead of the system
+    /usr/share/terminalwidget6 tree owned by deepin-terminal — no more
+    dpkg file conflict, and the relocatable fallback finds the new
+    location for portable installs.
+
+ -- re2zero <re2zero@users.noreply.github.com>  Tue, 29 Sep 2026 13:30:00 +0800
+
 mudi (0.4.1) unstable; urgency=medium
 
   * CI releases now ship Linux installation packages: deb (works on
