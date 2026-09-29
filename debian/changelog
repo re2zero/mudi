@@ -1,3 +1,17 @@
+mudi (0.4.4) unstable; urgency=medium
+
+  * Fix terminal color schemes (Theme 1-10 and others) missing from the
+    settings page in CI-built packages: COLORSCHEMES_DIR was baked with
+    the default /usr/local prefix while the deb/rpm install to /usr, and
+    the relocatable fallback concatenated the app dir and the "../share"
+    macro without a separator, producing a path that never exists. CI now
+    configures with CMAKE_INSTALL_PREFIX=/usr and the fallback inserts
+    the slash, so installed and portable layouts both resolve the data
+    directory. Affects all GitHub-release debs since v0.3.0; local deepin
+    builds were unaffected (system terminalwidget reads its own data dir).
+
+ -- re2zero <re2zero@users.noreply.github.com>  Tue, 29 Sep 2026 17:00:00 +0800
+
 mudi (0.4.3) unstable; urgency=medium
 
   * Fix the CI-built Linux binaries failing on systems with an older
