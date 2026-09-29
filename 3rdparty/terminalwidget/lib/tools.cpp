@@ -113,11 +113,15 @@ const QStringList get_color_schemes_dirs()
     // VENDOR (see ../VENDOR.md): relocatable fallback for bundled builds
     // (AppImage / Windows portable tree): <appdir>/../share/<libname>/color-schemes
     if (rval.isEmpty()) {
-        d.setPath(QCoreApplication::applicationDirPath()
-                  + QString::fromLatin1(TERMWIDGET_RELOCATABLE_DATADIR "/color-schemes/"));
+        // applicationDirPath() has no trailing slash and the macro starts
+        // with "..", so the separator must be inserted here — a plain
+        // concat yields "<appdir>../share/..." which never exists
+        const QString relocatable =
+            QCoreApplication::applicationDirPath() + QLatin1Char('/')
+            + QLatin1String(TERMWIDGET_RELOCATABLE_DATADIR "/color-schemes/");
+        d.setPath(relocatable);
         if (d.exists())
-            rval << (QCoreApplication::applicationDirPath()
-                     + QString::fromLatin1(TERMWIDGET_RELOCATABLE_DATADIR "/color-schemes/"));
+            rval << relocatable;
     }
 #endif
 
