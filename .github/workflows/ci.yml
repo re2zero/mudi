@@ -20,14 +20,10 @@ jobs:
       matrix:
         include:
           - name: linux-x86_64
-            # jammy on purpose: GCC 12 / glibc 2.35 / Qt 6.2 headers keep
-            # the binaries' symbol requirements low (GLIBCXX_3.4.30,
-            # GLIBC_2.35) so one package covers deepin 23/25, Debian 12
-            # and Ubuntu 22.04+; Qt 6 is forward-compatible at runtime
-            os: ubuntu-22.04
+            os: ubuntu-24.04
             dtk: OFF
           - name: linux-aarch64
-            os: ubuntu-22.04-arm
+            os: ubuntu-24.04-arm
             dtk: OFF
           - name: macos-aarch64
             os: macos-14
@@ -45,11 +41,9 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          # no qt6-l10n-tools on jammy: lrelease/lupdate live in
-          # qt6-tools-dev-tools there
           sudo apt-get install -y \
             build-essential cmake pkg-config \
-            qt6-base-dev qt6-tools-dev qt6-tools-dev-tools \
+            qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools \
             qt6-5compat-dev \
             libicu-dev libuchardet-dev libchardet-dev
           echo "PKG_CONFIG_PATH=$PKG_CONFIG_PATH" >> "$GITHUB_ENV"
@@ -115,7 +109,7 @@ jobs:
           Priority: optional
           Architecture: ${DEB_ARCH}
           Maintainer: re2zero <re2zero@users.noreply.github.com>
-          Depends: libqt6core6t64 (>= 6.2) | libqt6core6 (>= 6.2), libqt6gui6 (>= 6.2), libqt6widgets6 (>= 6.2), libqt6network6 (>= 6.2), libqt6dbus6 (>= 6.2), libqt6core5compat6, libuchardet0, libchardet1
+          Depends: libqt6core6t64 (>= 6.4) | libqt6core6 (>= 6.4), libqt6gui6 (>= 6.4), libqt6widgets6 (>= 6.4), libqt6network6 (>= 6.4), libqt6dbus6 (>= 6.4), libqt6core5compat6, libuchardet0, libchardet1
           Description: MuDi (牧笛) — terminal workspace frontend for AI coding agents
            GUI frontend for the herdr terminal workspace manager (plain Qt
            build; on deepin/UOS install the DTK-flavored package instead).
